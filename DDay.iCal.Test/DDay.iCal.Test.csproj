@@ -134,7 +134,10 @@
     <None Include="Calendars\Recurrence\Bug3517553.ics">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Calendars\Recurrence\Bug66.ics">
+    <None Include="Calendars\Recurrence\UntilDateTimeZoneNotTakenInAccount.ics">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Calendars\Recurrence\UntilDateTimeZoneNotTakenInAccount_TZID.ics">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Calendars\Serialization\Bug3363485.ics">

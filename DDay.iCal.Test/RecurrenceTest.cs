@@ -2518,6 +2518,52 @@ namespace DDay.iCal.Test
         }
 
         /// <summary>
+        /// Tests a bug on UNTIL time zone not taken in account correctly (for UTC+xx timezone only)
+        /// </summary>
+        [Test, Category("Recurrence")]
+        public void TakeInAccountUNTILTimeZoneToIncludeLastOccurrenceCorrectly()
+        {
+            IICalendar iCal = iCalendar.LoadFromFile(@"Calendars\Recurrence\UntilDateTimeZoneNotTakenInAccount.ics")[0];
+            string localTZID = iCal.TimeZones[0].TZID;
+
+            EventOccurrenceTest(
+                iCal,
+                new iCalDateTime(2016, 3, 26, 0, 0, 0, localTZID),
+                new iCalDateTime(2016, 3, 31, 23, 0, 0, localTZID),
+                new iCalDateTime[]
+                {
+                    new iCalDateTime(2016, 3, 28, 0, 00, 00, localTZID),
+                    new iCalDateTime(2016, 3, 29, 0, 00, 00, localTZID),
+                },
+                null,
+                0
+            );
+        }
+
+        /// <summary>
+        /// Tests a bug on UNTIL time zone (TZID format) not taken in account correctly (for UTC+xx timezone only)
+        /// </summary>
+        [Test, Category("Recurrence")]
+        public void TakeInAccountUNTILTimeZoneToIncludeLastOccurrenceCorrectly_TZID()
+        {
+            IICalendar iCal = iCalendar.LoadFromFile(@"Calendars\Recurrence\UntilDateTimeZoneNotTakenInAccount_TZID.ics")[0];
+            string localTZID = iCal.TimeZones[0].TZID;
+
+            EventOccurrenceTest(
+                iCal,
+                new iCalDateTime(2016, 3, 26, 0, 0, 0, localTZID),
+                new iCalDateTime(2016, 3, 31, 23, 0, 0, localTZID),
+                new iCalDateTime[]
+                {
+                    new iCalDateTime(2016, 3, 28, 0, 00, 00, localTZID),
+                    new iCalDateTime(2016, 3, 29, 0, 00, 00, localTZID),
+                },
+                null,
+                0
+            );
+        }
+
+        /// <summary>
         /// Tests a bug with DAILY recurrence values
         /// https://sourceforge.net/tracker/?func=detail&aid=2966236&group_id=187422&atid=921236
         /// Sourceforge.net bug #2966236

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Reflection;
-using System.Diagnostics;
+using System.Linq;
+using TimeZoneMapper;
 
 namespace DDay.iCal.Serialization.iCalendar
 {
@@ -230,7 +230,22 @@ namespace DDay.iCal.Serialization.iCalendar
                                         {
                                             IDateTime dt = serializer.Deserialize(new StringReader(keyValue)) as IDateTime;
                                             if (dt != null)
-                                                r.Until = dt.Value;                                            
+                                            {
+                                                TimeZoneInfo timeZoneInfo = null;
+                                                if (r.Calendar != null && r.Calendar.TimeZones.Any())
+                                                {
+                                                    var tzId = r.Calendar.TimeZones.First().TZID;
+                                                    if (TimeZoneMap.DefaultValuesTZMapper.GetAvailableTZIDs().Contains(tzId))
+                                                    {
+                                                        timeZoneInfo = TimeZoneMap.DefaultValuesTZMapper.MapTZID(tzId);
+                                                    }
+                                                    else if(TimeZoneInfo.GetSystemTimeZones().Any(x => x.StandardName == tzId))
+                                                    {
+                                                        timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(tzId);
+                                                    }
+                                                }
+                                                r.Until = timeZoneInfo == null ? dt.Value : TimeZoneInfo.ConvertTimeFromUtc(dt.Value, timeZoneInfo);
+                                            }
                                         }
                                     } break;
                                 case "COUNT": r.Count = Convert.ToInt32(keyValue); break;
