@@ -19,7 +19,6 @@ using System.Security;
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
-[assembly: AllowPartiallyTrustedCallers]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("47df6d82-7a92-4deb-b276-377e89f220be")]
@@ -31,5 +30,5 @@ using System.Security;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.0.2.$WCREV$")]
-[assembly: AssemblyFileVersion("1.0.2.$WCREV$")]
+[assembly: AssemblyVersion("1.0.2")]
+[assembly: AssemblyFileVersion("1.0.2")]
