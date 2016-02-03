@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Runtime.Serialization;
 using DDay.iCal.Serialization.iCalendar;
 using System.IO;
+using System.Linq;
 
 namespace DDay.iCal
 {
@@ -357,7 +358,13 @@ namespace DDay.iCal
             {
                 if (IsUniversalTime)
                     return DateTime.SpecifyKind(Value, DateTimeKind.Utc);
-                else if (TZID != null)
+                if (TZID == null && !HasTime)
+                {
+                    // NB : RFC tells that datetime/time shoud be in local time if no timezone specified, without Calendar timezone should not be taken in account
+                    // But for date only, since UTC is used for equality, we need to interpret date without TZID as in calendar TimeZone (first one arbitrarly)
+                    TZID = Calendar?.TimeZones.FirstOrDefault()?.TZID;
+                }
+                if (TZID != null)
                 {
                     DateTime value = Value;
 

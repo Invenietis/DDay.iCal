@@ -109,6 +109,10 @@
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.XML" />
+    <Reference Include="TimeZoneMapper, Version=1.2.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TimeZoneMapper.1.2.7.0\lib\net40-client\TimeZoneMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlarmTest.cs" />
@@ -134,6 +138,12 @@
     <None Include="Calendars\Recurrence\Bug3517553.ics">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Calendars\Recurrence\RecurringEventWithExcludedDates_TakeInAccountTimezone_OtherTimezone.ics">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Calendars\Recurrence\RecurringEventWithExcludedDates_TakeInAccountTimezone.ics">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Calendars\Recurrence\UntilDateTimeZoneNotTakenInAccount.ics">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -146,11 +156,13 @@
     <None Include="Calendars\Serialization\Bug3379920.ics">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\AssemblyInfo.cs.template" />
     <Compile Include="RecurrenceTest.cs" />
     <Compile Include="SerializationTest.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TodoTest.cs" />
+    <None Include="TimeZoneMapper.chm" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DDay.Collections\DDay.Collections\DDay.Collections.csproj">

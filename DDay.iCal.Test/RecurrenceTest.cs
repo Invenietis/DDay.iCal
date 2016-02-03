@@ -12,6 +12,7 @@ using System.Threading;
 using System.Web;
 using DDay.iCal.Serialization.iCalendar;
 using NUnit.Framework;
+using TimeZoneMapper;
 
 namespace DDay.iCal.Test
 {
@@ -2557,6 +2558,35 @@ namespace DDay.iCal.Test
                 {
                     new iCalDateTime(2016, 3, 28, 0, 00, 00, localTZID),
                     new iCalDateTime(2016, 3, 29, 0, 00, 00, localTZID),
+                },
+                null,
+                0
+            );
+        }
+
+        /// <summary>
+        /// Tests a bug on UNTIL time zone not taken in account correctly (for UTC+xx timezone only)
+        /// </summary>
+        [Test, Category("Recurrence")]
+        public void TakeInAccountTimeZoneForExcludedDates()
+        {
+            IICalendar iCal = iCalendar.LoadFromFile(@"Calendars\Recurrence\RecurringEventWithExcludedDates_TakeInAccountTimezone.ics")[0];
+            if (TimeZoneMap.DefaultValuesTZMapper.MapTZID(iCal.TimeZones.First().TZID).Equals(TimeZoneInfo.Local))
+            {
+                // We need a different timezone between local time zone and calendar timezone to reproduce this bug, 
+                // so if tests are run in same timezone as first file, we need to load another one
+                iCal = iCalendar.LoadFromFile(@"Calendars\Recurrence\RecurringEventWithExcludedDates_TakeInAccountTimezone_OtherTimezone.ics")[0];
+            }
+            string localTZID = iCal.TimeZones[0].TZID;
+
+            EventOccurrenceTest(
+                iCal,
+                new iCalDateTime(2016, 2, 20, 0, 0, 0, localTZID),
+                new iCalDateTime(2016, 3, 3, 23, 0, 0, localTZID),
+                new iCalDateTime[]
+                {
+                    new iCalDateTime(2016, 2, 29, 0, 00, 00, localTZID),
+                    new iCalDateTime(2016, 3, 1, 0, 00, 00, localTZID),
                 },
                 null,
                 0
