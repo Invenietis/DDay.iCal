@@ -24,18 +24,15 @@ namespace DDay.iCal
 
         #region Overrides
 
-        public override IList<IPeriod> Evaluate(IDateTime referenceDate, DateTime periodStart, DateTime periodEnd, bool includeReferenceDateInResults)
+        public override HashSet<IPeriod> Evaluate(IDateTime referenceDate, DateTime periodStart, DateTime periodEnd, bool includeReferenceDateInResults)
         {
-            Dictionary<IPeriod , bool> periodLookup = new Dictionary<IPeriod, bool>();
-
-            List<IPeriod> periods = new List<IPeriod>();
+            var periods = new HashSet<IPeriod>();
 
             if (includeReferenceDateInResults)
             {
                 IPeriod p = new Period(referenceDate);
-                if (!periodLookup.ContainsKey(p))
+                if (!periods.Contains(p))
                 {
-                    periodLookup.Add(p , true);
                     periods.Add(p);
                 }
             }
@@ -43,15 +40,8 @@ namespace DDay.iCal
             if (periodEnd < periodStart)
                 return periods;
 
-            foreach (IPeriod p in m_PeriodList)
-            {
-                if (!periodLookup.ContainsKey(p))
-                {
-                    periodLookup.Add(p, true);
-                    periods.Add(p);
-                }
-            }
-
+            periods.UnionWith(m_PeriodList);
+            
             return periods;
         }
 
