@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DDay.iCal.Test</RootNamespace>
     <AssemblyName>DDay.iCal.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>DDay.iCal.Test.Startup</StartupObject>
     <FileUpgradeFlags>
@@ -109,9 +109,8 @@
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.XML" />
-    <Reference Include="TimeZoneMapper, Version=1.2.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TimeZoneMapper.1.2.7.0\lib\net40-client\TimeZoneMapper.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="TimeZoneMapper">
+      <HintPath>..\packages\TimeZoneMapper.1.2.8.0\lib\net40-client\TimeZoneMapper.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
