@@ -362,7 +362,8 @@ namespace DDay.iCal
                 {
                     // NB : RFC tells that datetime/time shoud be in local time if no timezone specified, without Calendar timezone should not be taken in account
                     // But for date only, since UTC is used for equality, we need to interpret date without TZID as in calendar TimeZone (first one arbitrarly)
-                    TZID = Calendar?.TimeZones.FirstOrDefault()?.TZID;
+                    if(Calendar != null && Calendar.TimeZones != null && Calendar.TimeZones.Any())
+                        TZID = Calendar.TimeZones.First().TZID;
                 }
                 if (TZID != null)
                 {

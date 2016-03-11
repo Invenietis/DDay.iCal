@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -13,9 +14,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © Douglas Day 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+[assembly: SecurityRules(SecurityRuleSet.Level1)]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
+// to COM components.  If you need to access a type in this assembly from q
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
