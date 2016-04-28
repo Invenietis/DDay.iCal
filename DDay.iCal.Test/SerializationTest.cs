@@ -74,8 +74,6 @@ namespace DDay.iCal.Test
                 bool isMatch = false;
                 foreach (ICalendarProperty p2 in cb2.Properties.AllOf(p1.Name))
                 {
-                    try
-                    {
                         Assert.AreEqual(p1, p2, "The properties '" + p1.Name + "' are not equal.");
                         if (p1.Value is IComparable)
                             Assert.AreEqual(0, ((IComparable)p1.Value).CompareTo(p2.Value), "The '" + p1.Name + "' property values do not match.");
@@ -86,8 +84,6 @@ namespace DDay.iCal.Test
 
                         isMatch = true;
                         break;
-                    }
-                    catch { }
                 }
 
                 Assert.IsTrue(isMatch, "Could not find a matching property - " + p1.Name + ":" + (p1.Value != null ? p1.Value.ToString() : string.Empty));                    
